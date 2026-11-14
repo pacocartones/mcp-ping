@@ -43,6 +43,16 @@ type CreateServerOptions = {
 export const createServer = ({
   pingTimeoutMs = DEFAULT_PING_TIMEOUT_MS,
 }: CreateServerOptions = {}) => {
+  if (
+    !Number.isInteger(pingTimeoutMs) ||
+    pingTimeoutMs < 1 ||
+    pingTimeoutMs > 2_147_483_647
+  ) {
+    throw new RangeError(
+      "pingTimeoutMs must be an integer between 1 and 2147483647",
+    );
+  }
+
   const server = new FastMCP({
     name: "Ping Tool",
     version: "1.0.0",
