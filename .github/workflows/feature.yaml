@@ -1,5 +1,8 @@
 name: Run Tests
 on:
+  push:
+    branches:
+      - harden/ping-argv-validation-timeout
   pull_request:
     branches:
       - main
@@ -8,6 +11,9 @@ on:
       - synchronize
       - reopened
       - ready_for_review
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
